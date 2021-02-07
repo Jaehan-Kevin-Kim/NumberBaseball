@@ -39,6 +39,8 @@ const App = () => {
         ''
       )}, answer.join type: ${typeof answer.join('')}`
     );
+
+    console.log(`value.split(''): ${value.split('')[0]}`);
     // console.log(value === answer);
     if (value === answer.join('')) {
       setResult(
@@ -51,10 +53,32 @@ const App = () => {
         setValue('');
         setAnswer(getNumbers);
       }, 3000);
-    }
-    setValue('');
+    } else {
+      let strike = 0;
+      let ball = 0;
+      for (let i = 0; i < answer.length; i++) {
+        if (value.split('')[i] === answer[i]) {
+          strike++;
+        } else if (value.includes(answer[i])) {
+          ball++;
+        }
+      }
 
-    inputRef.current.focus();
+      console.log(`strike: ${strike}`);
+      console.log(`ball: ${ball}`);
+
+      setTries((prevState) => [
+        ...prevState,
+        {
+          userInput: value,
+          resultState: `${strike} Strike and ${ball} Ball`,
+        },
+      ]);
+
+      setValue('');
+
+      inputRef.current.focus();
+    }
   };
 
   const onChangeInput = (c) => {
@@ -73,14 +97,16 @@ const App = () => {
           maxLength='4'
           onChange={onChangeInput}></input>
       </form>
-      <div>
-        <span>Tries: {tries}</span>
-      </div>
+      <div>{/* <span>Tries: {tries}</span> */}</div>
       <ul>
-        <li>
-          <p>{value}</p>
-          <p>{result}</p>
-        </li>
+        {tries.map((v, i) => {
+          return (
+            <li key={i}>
+              <p>{v.userInput}</p>
+              <p>{v.resultState}</p>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

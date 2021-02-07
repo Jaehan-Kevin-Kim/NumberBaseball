@@ -11,36 +11,60 @@ const getNumbers = () => {
     selectedNumber.push(candidateNumbers.splice(selectedIndex, 1).toString());
   }
 
-  console.log(selectedNumber);
+  // console.log(selectedNumber);
   return selectedNumber;
 };
 
 const App = () => {
-  const [tries, setTries] = useState(0);
+  const [tries, setTries] = useState([]);
   const [value, setValue] = useState('');
   const [result, setResult] = useState('');
   const [answer, setAnswer] = useState(getNumbers);
   const inputRef = useRef(null);
 
-  console.log(`answer: ${answer}`);
-  console.log(typeof answer[0]);
-
-  const onChangeInput = (c) => {
-    setValue(c.target.value);
-  };
+  console.log(answer);
+  // console.log(`answer: ${answer}`);
+  // console.log(typeof answer[0]);
 
   //onChange={onChangeInput}
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    console.log(`value: ${value}`);
+    console.log(`value: ${value}, value type = ${typeof value}`);
+    // console.log(`result: ${result}`);
+
+    console.log(
+      `answer.join(): ${answer.join(
+        ''
+      )}, answer.join type: ${typeof answer.join('')}`
+    );
+    // console.log(value === answer);
+    if (value === answer.join('')) {
+      setResult(
+        'Congratuation. You got the correct numbers, The game will be restarted'
+      );
+
+      setTimeout(() => {
+        setResult('');
+        setTries([]);
+        setValue('');
+        setAnswer(getNumbers);
+      }, 3000);
+    }
+    setValue('');
 
     inputRef.current.focus();
   };
 
+  const onChangeInput = (c) => {
+    setValue(c.target.value);
+  };
+
   return (
     <div className='App'>
+      <p>{result}</p>
+
       <form onSubmit={onSubmit}>
         <input
           ref={inputRef}

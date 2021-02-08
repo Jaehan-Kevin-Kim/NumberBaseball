@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import List from './List';
 
 const getNumbers = () => {
   const candidateNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -11,7 +12,6 @@ const getNumbers = () => {
     selectedNumber.push(candidateNumbers.splice(selectedIndex, 1).toString());
   }
 
-  // console.log(selectedNumber);
   return selectedNumber;
 };
 
@@ -23,16 +23,11 @@ const App = () => {
   const inputRef = useRef(null);
 
   console.log(answer);
-  // console.log(`answer: ${answer}`);
-  // console.log(typeof answer[0]);
-
-  //onChange={onChangeInput}
 
   const onSubmit = (e) => {
     e.preventDefault();
 
     console.log(`value: ${value}, value type = ${typeof value}`);
-    // console.log(`result: ${result}`);
 
     console.log(
       `answer.join(): ${answer.join(
@@ -41,7 +36,6 @@ const App = () => {
     );
 
     console.log(`value.split(''): ${value.split('')[0]}`);
-    // console.log(value === answer);
     if (value === answer.join('')) {
       setResult(
         'Congratuation. You got the correct numbers, The game will be restarted'
@@ -54,26 +48,34 @@ const App = () => {
         setAnswer(getNumbers);
       }, 3000);
     } else {
-      let strike = 0;
-      let ball = 0;
-      for (let i = 0; i < answer.length; i++) {
-        if (value.split('')[i] === answer[i]) {
-          strike++;
-        } else if (value.includes(answer[i])) {
-          ball++;
+      if (tries.length < 9) {
+        let strike = 0;
+        let ball = 0;
+
+        for (let i = 0; i < answer.length; i++) {
+          if (value.split('')[i] === answer[i]) {
+            strike++;
+          } else if (value.includes(answer[i])) {
+            ball++;
+          }
         }
+
+        console.log(`strike: ${strike}`);
+        console.log(`ball: ${ball}`);
+
+        setTries((prevState) => [
+          ...prevState,
+          {
+            userInput: value,
+            try: tries.length + 1,
+            resultState: `${strike} Strike and ${ball} Ball`,
+          },
+        ]);
+      } else {
+        setResult('You are failed to find correct numbers. Please try again.');
+        setTries([]);
+        setAnswer(getNumbers);
       }
-
-      console.log(`strike: ${strike}`);
-      console.log(`ball: ${ball}`);
-
-      setTries((prevState) => [
-        ...prevState,
-        {
-          userInput: value,
-          resultState: `${strike} Strike and ${ball} Ball`,
-        },
-      ]);
 
       setValue('');
 
@@ -97,15 +99,12 @@ const App = () => {
           maxLength='4'
           onChange={onChangeInput}></input>
       </form>
-      <div>{/* <span>Tries: {tries}</span> */}</div>
+      <div>
+        <h3>Number of Tries: {tries.length}</h3>
+      </div>
       <ul>
         {tries.map((v, i) => {
-          return (
-            <li key={i}>
-              <p>{v.userInput}</p>
-              <p>{v.resultState}</p>
-            </li>
-          );
+          return <List key={`${i} try`} tryInfo={v} />;
         })}
       </ul>
     </div>

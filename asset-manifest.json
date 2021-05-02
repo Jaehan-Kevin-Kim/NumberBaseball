@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/Jaehan-Kevin-Kim/NumberBaseball/static/css/main.7176885d.chunk.css",
+    "main.js": "/Jaehan-Kevin-Kim/NumberBaseball/static/js/main.b487deda.chunk.js",
+    "main.js.map": "/Jaehan-Kevin-Kim/NumberBaseball/static/js/main.b487deda.chunk.js.map",
+    "runtime-main.js": "/Jaehan-Kevin-Kim/NumberBaseball/static/js/runtime-main.e12826f8.js",
+    "runtime-main.js.map": "/Jaehan-Kevin-Kim/NumberBaseball/static/js/runtime-main.e12826f8.js.map",
+    "static/js/2.80ce6250.chunk.js": "/Jaehan-Kevin-Kim/NumberBaseball/static/js/2.80ce6250.chunk.js",
+    "static/js/2.80ce6250.chunk.js.map": "/Jaehan-Kevin-Kim/NumberBaseball/static/js/2.80ce6250.chunk.js.map",
+    "index.html": "/Jaehan-Kevin-Kim/NumberBaseball/index.html",
+    "static/css/main.7176885d.chunk.css.map": "/Jaehan-Kevin-Kim/NumberBaseball/static/css/main.7176885d.chunk.css.map",
+    "static/js/2.80ce6250.chunk.js.LICENSE.txt": "/Jaehan-Kevin-Kim/NumberBaseball/static/js/2.80ce6250.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e12826f8.js",
+    "static/js/2.80ce6250.chunk.js",
+    "static/css/main.7176885d.chunk.css",
+    "static/js/main.b487deda.chunk.js"
+  ]
+}
